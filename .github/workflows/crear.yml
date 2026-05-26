@@ -4,7 +4,7 @@ on:
   push:
     branches: [ "main" ]
 
-    PERMISSIONS:
+permissions:
       contents: read
       packages: write
 
@@ -39,8 +39,8 @@ jobs:
     - name: Construir la imagen de Docker
       run: docker build -t ghcr.io/jessicacunalata29/hello-jessica:1.0.0 .
 
-      -name: Login en Github container registry
+    - name: Login en Github container registry
       run: echo "${{ secrets.GHCR_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      -name: Publicar la imagen 
+    - name: Publicar la imagen 
       run: docker push ghcr.io/jessicacunalata29/hello-jessica:1.0.0
